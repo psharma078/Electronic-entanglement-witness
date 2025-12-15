@@ -1,0 +1,9 @@
+N = 40			#number of sites 
+Nup = 20                 
+Ndn = 20		#up and dn electrons
+
+U=0.0			#Hubbard U
+V=0.0			#extended NN interaction
+pbc = false             #boundary condition, pbc=false is obc
+
+Ncut = 4  		# #discarded sites on the left and right edges for measurement
