@@ -1,7 +1,7 @@
 using ITensors, ITensorMPS, Plots, HDF5, Random, TOML
 
 include("/work2/10514/sharmaprakash078/frontera/entanglement_witness/newProject/dmrg_lbo.jl")
-include("GroundState.jl")
+include("GroundState_lbo.jl")
 
 #Get input file
 if length(ARGS)<1
