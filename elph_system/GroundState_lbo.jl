@@ -93,26 +93,26 @@ end
 function gs_calcs(N,U,V,Nup,Ndn,ω,g,g1,barePhDim,LBO_dims,init_n,pbc)
     os = Hubbard_exHolstein_1D(N, U, V, ω, g, g1, pbc)
 
-    fname = "psi_N$(N)_Nup$(Nup)_Ndn$(Ndn)_U$(U)_w$(w)_g$(g)_LBOdim$(LBO_dims[end]).h5"
-    f = h5open(fname,"r")
-    psi0 = read(f,"psi",MPS)
-    close(f)
+    #fname = "psi_N$(N)_Nup$(Nup)_Ndn$(Ndn)_U$(U)_w$(w)_g$(g)_LBOdim$(LBO_dims[end]).h5"
+    #f = h5open(fname,"r")
+    #psi0 = read(f,"psi",MPS)
+    #close(f)
 
-    sites = siteinds(psi0)
+    #sites = siteinds(psi0)
     
-    #sites = mixed_sites(N,barePhDim)
+    sites = mixed_sites(N,barePhDim)
     H = MPO(os,sites)
 
-    #ntot = Nup + Ndn  #init state for dopped system
-    #select_el_sites = sort(shuffle(collect(1:2:N))[1:ntot])
-    #state = [isodd(n) ? "Emp" : "$(init_n)" for n in 1:N]
-    #for (id,s) in enumerate(select_el_sites)
-    #    state[s] = isodd(id) ? "Up" : "Dn"
-    #end
+    ntot = Nup + Ndn  #init state for dopped system
+    select_el_sites = sort(shuffle(collect(1:2:N))[1:ntot])
+    state = [isodd(n) ? "Emp" : "$(init_n)" for n in 1:N]
+    for (id,s) in enumerate(select_el_sites)
+        state[s] = isodd(id) ? "Up" : "Dn"
+    end
 
     println("initial state")
-    #@show state
-    #psi0 = MPS(sites,state)
+    @show state
+    psi0 = MPS(sites,state)
     @show expect(psi0,"N",sites=[n for n in 2:2:N])
     
     nsweeps = 14
