@@ -23,4 +23,5 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/work/00434/eijkhout/arpack/installation
 #export JULIA_NUM_THREADS=1
 
 mpiexec -n 110 julia main_entanglement.jl > out_ent_L40_Nup20_Ndn20_U0_V0.txt 2>&1
+##mpiexec -n 1 julia main_sc_orrelation.jl input_$1 > out_measure_L80_Nup32_Ndn32_U8_input_$1.txt 2>&1
 wait
