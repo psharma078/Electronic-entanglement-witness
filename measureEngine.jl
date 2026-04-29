@@ -128,8 +128,8 @@ function compute_2CRDM(psi::MPS, op_sites::Vector{NTuple{4, Int64}}, indices::Ve
     ##1. First, compute 2 point correlation
     site_start = op_sites[1][1]
     site_end = op_sites[end][end]
-    el_sites = collect(site_start:site_end)    #for electronic system only
-    #el_sites = collect(site_start:2:site_end)  #for el-ph (only odd sites)
+    #el_sites = collect(site_start:site_end)    #for electronic system only
+    el_sites = collect(site_start:2:site_end)  #for el-ph (only odd sites)
     idx = collect(1:length(el_sites))
     idx_pairs = vec([(j, i) for i in idx, j in idx])
     site_pairs=[(el_sites[m],el_sites[n]) for (m,n) in idx_pairs]
