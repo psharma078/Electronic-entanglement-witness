@@ -1,0 +1,27 @@
+#!/bin/sh
+#SBATCH -J corr ##en0.25
+#SBATCH -p normal
+#SBATCH -N 4
+#SBATCH -n 110
+#SBATCH -t 48:00:00
+#SBATCH -e job.err
+#SBATCH -o job.out
+#SBATCH --mail-type=all
+#SBATCH --mail-user=PSHAR50@emory.edu
+#SBATCH -A DMR21001
+#SBATCH -V
+cd $SLURM_SUBMIT_DIR
+
+rm job.*
+
+export OMP_PROC_BIND=true
+export OMP_PLACES=threads
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/work/00434/eijkhout/arpack/installation-3.7.0-intel/lib64
+##export OMP_NUM_THREADS=28
+#export OMP_NUM_THREADS=1
+#export MKL_NUM_THREADS=1
+#export JULIA_NUM_THREADS=1
+
+##mpiexec -n 110 julia main_entanglement.jl input_$1.toml > out_ent_L80_Nup32_Ndn32_input_$1_newnew.txt 2>&1
+mpiexec -n 110 julia measure_correlation.jl input_$1.toml > out_corr_L80_Nup32_Ndn32_input_$1.txt 2>&1
+wait
